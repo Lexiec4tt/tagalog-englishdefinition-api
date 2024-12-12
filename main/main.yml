@@ -1,0 +1,23 @@
+name: Build and Release
+on: 
+  push:
+    paths:
+      - 'Scraped Data/Dictionaries/*_dictionary.json'
+jobs:
+    build:
+      name: Regenerate Word Lists
+      runs-on: ubuntu-latest
+      steps:
+        # Checkout Repository
+        - uses: actions/checkout@v1
+
+        - name: Update Filipino Dictionary
+          run: |
+            python "Helper Scripts"/update_filipino_dictionary.py --input_files "Scraped Data"/Dictionaries/tagalog_dictionary.json
+
+ - name: Commit Files
+          run: |
+            git config --local user.email action@github.com
+            git config --local user.name "GitHub Action"
+            git add .
+            git commit -m "Update word lists based on dictionary JSON files"
