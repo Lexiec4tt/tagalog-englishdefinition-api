@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import json
+import os
 
 app = Flask(__name__)
 
@@ -21,4 +22,5 @@ def define_word():
     return jsonify({"error": "Word not found"}), 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.getenv('PORT', 10000))  # Default to port 10000 if PORT is not set
+    app.run(host='0.0.0.0', port=port)
