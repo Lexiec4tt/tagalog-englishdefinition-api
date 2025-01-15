@@ -13,13 +13,23 @@ def define_word():
     # Get the word parameter from the URL
     word = request.args.get('word')
 
+    # Array of all matching words
+    words = []
+
     # Search for the word in the list of dictionaries
     for entry in dictionary_data:
         if entry["word"].lower() == word.lower():  # Case-insensitive match
-            return jsonify({"word": entry["word"], "definition": entry["definition"]})
+            jsonWord = jsonify({"word": entry["word"], "definition": entry["definition"]})
+            words.append(jsonWord)
     
     # If the word is not found
-    return jsonify({"error": "Word not found"}), 404
+    if not words:
+        return jsonify({"error": "Word not found"}), 404
+    
+    # If there are word/s
+    else:
+        return words;
+    
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 10000))  # Default to port 10000 if PORT is not set
