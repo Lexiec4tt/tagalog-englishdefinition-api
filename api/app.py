@@ -28,7 +28,7 @@ def define_word():
     
     # If there are word/s
     else:
-        return words;
+        return jsonify(words);
     
 
 if __name__ == '__main__':
