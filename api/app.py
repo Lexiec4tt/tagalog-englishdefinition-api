@@ -1,8 +1,12 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS  # Import the CORS module
 import json
 import os
 
 app = Flask(__name__)
+
+# Enable CORS for all routes
+CORS(app)
 
 # Load the dictionary data
 with open('Scraped Data/Dictionaries/tagalog_dictionary.json', 'r') as f:
